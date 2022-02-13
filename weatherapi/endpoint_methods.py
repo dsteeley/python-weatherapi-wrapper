@@ -8,8 +8,13 @@ from weatherapi.web_api.interface import APICaller
 from weatherapi.web_api.parser import extract_hourly_timeseries_frame
 
 
-def get_weather_history(api_key: str, latitude: float, longitude: float, start_time: dt.datetime,
-                        end_time: Union[dt.datetime, None] = None) -> pd.DataFrame:
+def get_weather_history(
+    api_key: str,
+    latitude: float,
+    longitude: float,
+    start_time: dt.datetime,
+    end_time: Union[dt.datetime, None] = None,
+) -> pd.DataFrame:
     api_caller = APICaller(api_key)
     date_range = generate_date_range_for_period(start_time, end_time)
 

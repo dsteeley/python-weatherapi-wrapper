@@ -4,12 +4,18 @@ from weatherapi.constants import Headers
 
 
 def extract_hourly_timeseries_frame(history_result: dict) -> pd.DataFrame:
-    hourly_weather = history_result.get(Headers.forecast).get(Headers.forecast_day)[0].get(Headers.hour)
+    hourly_weather = (
+        history_result.get(Headers.forecast)
+        .get(Headers.forecast_day)[0]
+        .get(Headers.hour)
+    )
 
     result = pd.DataFrame()
 
     for item in hourly_weather:
-        result = pd.concat([result, pd.DataFrame.from_records([item])], ignore_index=True)
+        result = pd.concat(
+            [result, pd.DataFrame.from_records([item])], ignore_index=True
+        )
 
     result[Headers.time] = pd.to_datetime(result[Headers.time])
 
