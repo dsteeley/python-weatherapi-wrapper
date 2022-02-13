@@ -17,6 +17,5 @@ def get_weather_history(api_key: str, latitude: float, longitude: float, start_t
     for date in date_range:
         response_json = api_caller.get_history(latitude, longitude, date, hour=None)
         data = extract_hourly_timeseries_frame(response_json)
-        history = history.append(data)
-
+        history = pd.concat([history, data])
     return history
