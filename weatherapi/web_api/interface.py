@@ -24,12 +24,26 @@ class APICaller:
         request_parameters = self._build_parameters_dict(
             latitude=latitude, longitude=longitude, day=day, hour=hour
         )
+        return self._call_api(Endpoints.history, params=request_parameters).json()
 
-        response = requests.get(Endpoints.history, params=request_parameters)
+    def get_forecast(
+        self,
+        latitude: float,
+        longitude: float,
+        day: dt.date,
+        hour: Union[int, None] = None,
+    ) -> dict:
+        request_parameters = self._build_parameters_dict(
+                latitude=latitude, longitude=longitude, day=day, hour=hour
+            )
+        return self._call_api(Endpoints.forecast, params=request_parameters).json()
+
+    def _call_api(self, endpoint, parameters):
+        response = requests.get(endpoint, params=parameters)
         if not response.status_code == 200:
             raise APINotCalledException(response.text)
-        logger.debug(f"Get history response {response.json()}")
-        return response.json()
+        logger.debug(f"Get weatherapi response {response.json()}")
+        return response
 
     def _build_parameters_dict(self, latitude, longitude, day, hour=None) -> dict:
         parameters = {
