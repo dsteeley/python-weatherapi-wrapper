@@ -4,7 +4,7 @@ from typing import Union
 import requests
 
 from weatherapi.constants import Parameters, Endpoints
-import logger
+from weatherapi.logger import logger
 
 class APINotCalledException(Exception):
     pass
@@ -38,8 +38,8 @@ class APICaller:
             )
         return self._call_api(Endpoints.forecast, params=request_parameters).json()
 
-    def _call_api(self, endpoint, parameters):
-        response = requests.get(endpoint, params=parameters)
+    def _call_api(self, endpoint, params):
+        response = requests.get(endpoint, params=params)
         if not response.status_code == 200:
             raise APINotCalledException(response.text)
         logger.debug(f"Get weatherapi response {response.json()}")

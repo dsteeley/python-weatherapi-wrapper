@@ -1,1 +1,1 @@
-from weatherapi.endpoint_methods import get_weather_history
+from weatherapi.endpoint_methods import get_weather_history, get_weather_forecast

@@ -2,7 +2,7 @@ import datetime as dt
 from typing import Union
 
 import pandas as pd
-import logger
+from weatherapi.logger import logger
 
 
 def generate_date_range_for_period(
