@@ -14,7 +14,9 @@ class Headers:
 class Endpoints:
     base_url = "http://api.weatherapi.com/v1/"
     history_route = "history.json"
+    forecast_route = "forecast.json"
     history = f"{base_url}{history_route}"
+    forecast = f"{base_url}{forecast_route}"
 
 
 class Parameters:

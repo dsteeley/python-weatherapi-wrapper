@@ -1,8 +1,11 @@
 [tool.poetry]
-name = "python-weatherapi-wrapper"
+name = "weatherapi"
 version = "0.1.0"
 description = ""
 authors = ["Jozef Tkocz"]
+packages = [
+    { include = "*.py", from = "weatherapi/"},
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"

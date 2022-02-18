@@ -24,3 +24,20 @@ def get_weather_history(
         data = extract_hourly_timeseries_frame(response_json)
         history = pd.concat([history, data])
     return history
+
+def get_weather_forecast(
+    api_key: str,
+    latitude: float,
+    longitude: float,
+    start_time: dt.datetime,
+    end_time: Union[dt.datetime, None] = None,
+) -> pd.DataFrame:
+    api_caller = APICaller(api_key)
+    date_range = generate_date_range_for_period(start_time, end_time)
+
+    history = pd.DataFrame()
+    for date in date_range:
+        response_json = api_caller.get_forecast(latitude, longitude, date, hour=None)
+        data = extract_hourly_timeseries_frame(response_json)
+        history = pd.concat([history, data])
+    return history
